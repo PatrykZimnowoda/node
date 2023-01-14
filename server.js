@@ -1,15 +1,18 @@
 const { request } = require("express");
 const express = require("express");
 const bcrypt = require("bcrypt-nodejs");
+const { required } = require("yargs");
 const app = express();
+const cors = require("cors");
 app.use(express.json());
+
 const database = {
   user: [
     {
       id: "123",
       name: "John",
       email: "Johny@gmail.com",
-
+      password: "cookies",
       entries: 0,
       joined: new Date(),
     },
@@ -17,21 +20,13 @@ const database = {
       id: "124",
       name: "Sally",
       email: "Sally@gmail.com",
-
+      password: "bananas",
       entries: 0,
       joined: new Date(),
     },
-    {
-      login: [
-        {
-          id: "987",
-          hash: "",
-          email: "Johny@gmail.com",
-        },
-      ],
-    },
   ],
 };
+app.use(cors());
 app.get("/", (req, res) => {
   res.send(database.user);
 });
@@ -97,6 +92,6 @@ app.put("/image", (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("app is running on port 3000");
+app.listen(3001, () => {
+  console.log("app is running on port 3001");
 });
